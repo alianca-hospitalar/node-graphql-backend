@@ -4,7 +4,15 @@ const {
   graphqlAstInputValueType
 } = require('./graphqlAst')
 
-function convertFieldDefinitionToInputTypeDefinition (field, typeMap) {
+const dependencies = {
+  graphqlAstNamedType,
+  graphqlAstInputObjectType,
+  graphqlAstInputValueType
+}
+
+function convertFieldDefinitionToInputTypeDefinition (field, typeMap, injection) {
+  const { graphqlAstNamedType, graphqlAstInputValueType } = Object.assign({}, dependencies, injection)
+
   const mappedType = typeMap[field.name.value]
   const fieldType = mappedType ? graphqlAstNamedType(mappedType) : field.type
 
@@ -22,7 +30,9 @@ function getInputFieldTypes (inputType) {
   )
 }
 
-function fillQueryTypes (documentDef) {
+function fillQueryTypes (documentDef, injection) {
+  const { graphqlAstInputObjectType, graphqlAstInputValueType } = Object.assign({}, dependencies, injection)
+
   const [ mainType, inputType ] = documentDef.definitions
 
   const typeMap = getInputFieldTypes(inputType)
@@ -30,7 +40,7 @@ function fillQueryTypes (documentDef) {
   const queryFilterOptionsType = graphqlAstInputObjectType(
     `${mainType.name.value}QueryFilterOptions`,
     'Objeto com o nome dos atributos e os valores a serem filtrados',
-    mainType.fields.map(field => convertFieldDefinitionToInputTypeDefinition(field, typeMap))
+    mainType.fields.map(field => convertFieldDefinitionToInputTypeDefinition(field, typeMap, injection))
   )
 
   const queryOptions = graphqlAstInputObjectType(

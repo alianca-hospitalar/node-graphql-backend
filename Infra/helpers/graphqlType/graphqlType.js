@@ -1,10 +1,12 @@
-const { gql } = require('apollo-server')
+const dependencies = {
+  gql: require('apollo-server').gql,
+  fillQueryTypes: require('./fillQueryTypes'),
+  fillDocumentation: require('./fillDocumentation')
+}
 
-const fillQueryTypes = require('./fillQueryTypes')
+module.exports = function grapqhQLType ({ definitions, entity, queryable = false }, injection) {
+  const { gql, fillDocumentation, fillQueryTypes } = Object.assign({}, dependencies, injection)
 
-const fillDocumentation = require('./fillDocumentation')
-
-module.exports = function grapqhQLType ({ definitions, entity, queryable = false }) {
   const documentDef = gql(definitions)
 
   if (entity) {

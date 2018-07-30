@@ -34,8 +34,11 @@ describe('fillDocumentation', () => {
     }
 
     const injectedDependencies = {
-      graphqlAstString: sinon.mock().exactly(4).returns('some fake documentation')
+      graphqlAstString: sinon.stub()
     }
+
+    injectedDependencies.graphqlAstString
+      .returns('some fake documentation')
 
     // When
     fillDocumentation(documentDef, entity, injectedDependencies)

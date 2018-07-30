@@ -1,6 +1,6 @@
-const graphqlAstString = Astring => ({
+const graphqlAstString = aString => ({
   kind: 'StringValue',
-  value: Astring,
+  value: aString,
   block: false
 })
 
