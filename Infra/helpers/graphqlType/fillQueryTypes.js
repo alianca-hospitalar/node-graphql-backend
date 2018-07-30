@@ -1,6 +1,4 @@
 const {
-  graphqlAstString,
-  graphqlAstName,
   graphqlAstNamedType,
   graphqlAstInputObjectType,
   graphqlAstInputValueType

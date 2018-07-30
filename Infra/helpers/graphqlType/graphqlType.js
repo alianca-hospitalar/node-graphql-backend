@@ -1,13 +1,5 @@
 const { gql } = require('apollo-server')
 
-const {
-  graphqlAstString,
-  graphqlAstName,
-  graphqlAstNamedType,
-  graphqlAstInputObjectType,
-  graphqlAstInputValueType
-} = require('./graphqlAst')
-
 const fillQueryTypes = require('./fillQueryTypes')
 
 const fillDocumentation = require('./fillDocumentation')
