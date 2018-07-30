@@ -9,7 +9,7 @@
   "scripts": {
     "build": "serverless package",
     "start": "NODE_PATH=./ && nodemon localServer.js",
-    "test": "NODE_ENV=test NODE_PATH=./ mocha \"Domain/**/*.test.js\" \"Infra/**/*.test.js\" --colors --require Tests/support.js --reporter spec",
+    "test": "NODE_ENV=test NODE_PATH=./ mocha \"Domain/**/*.test.js\" \"Infra/**/*.test.js\" --require \"Tests/support.js\" --colors --reporter spec",
     "test:watch": "yarn test -- --watch",
     "coverage": "nyc yarn test",
     "lint": "standard -v \"Domain/**/*.js\" \"Infra/**/*.js\" \"Features/**/*.js\" | snazzy",
@@ -35,20 +35,18 @@
     "winston": "^3.0.0"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
+    "dirty-chai": "^2.0.1",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.3",
     "nyc": "^12.0.2",
     "serverless": "^1.29.0",
+    "sinon": "^6.1.4",
     "snazzy": "^7.1.1",
     "standard": "^11.0.1",
     "watch-cli": "^0.2.3"
   },
   "nyc": {
-    "statements": 95,
-    "branches": 95,
-    "functions": 95,
-    "lines": 95,
-    "check-coverage": true,
     "reporter": [
       "lcov",
       "text",
