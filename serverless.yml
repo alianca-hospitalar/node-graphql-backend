@@ -1,0 +1,13 @@
+service: node-graphql-backend
+
+provider:
+  name: aws
+
+package:
+  excludeDevDependencies: false
+
+functions:
+  graphql:
+    handler: lambda.graphql
+  graphiql:
+    handler: lambda.graphiql

@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  graphql-service:
+    image: node:8.10
+    command: "sh -c 'yarn db:migrate && yarn start'"
+    environment:
+      - DATABASE_HOST=postgres
+      - DATABASE_NAME=graphql-sample
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=password
+      - DATABASE_PORT=5432
+    working_dir: /project
+    volumes:
+      - .:/project
+    ports:
+      - 4000:4000
+    links:
+      - postgres
+
+  postgres:
+    image: postgres:9.6
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=root
+      - POSTGRES_DB=graphql-sample
+    ports:
+      - 5432:5432
